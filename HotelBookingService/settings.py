@@ -70,6 +70,8 @@ TEMPLATES = [
     },
 ]
 
+AUTH_USER_MODEL = 'Customer.Customer'
+
 WSGI_APPLICATION = 'HotelBookingService.wsgi.application'
 
 

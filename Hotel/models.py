@@ -7,6 +7,9 @@ class Hotel(models.Model):
     description = models.TextField()
     rating = models.DecimalField(max_digits=5, decimal_places=2)
 
+    def __str__(self):
+        return self.name
+
 
 class RoomType(models.TextChoices):
     SINGLE = 'Single', 'Одномісний'
@@ -22,6 +25,13 @@ class Room(models.Model):
     capacity = models.SmallIntegerField()
     price_per_night = models.IntegerField()
     is_available = models.BooleanField()
+
+    def __str__(self):
+        f"Room number {self.number} in hotel {self.hotel}"
+
+
+
+
 
 
 
