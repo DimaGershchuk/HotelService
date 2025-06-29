@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}{{ hotel.name }}{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-8">
+      <h1>Room number: {{ room.number }}</h1>
+      <p><strong>Room type:</strong> {{ room.type }}</p>
+      <p><strong>Capacity :</strong> {{ room.capacity }}</p>
+      <p><strong>Capacity :</strong> {{ room.price_per_night }}</p>
+
+      <a href="{% url 'hotel-list' %}" class="btn btn-secondary mt-4">Назад до списку</a>
+    </div>
+  </div>
+{% endblock %}

@@ -19,6 +19,12 @@ class HotelDetailView(DetailView):
     context_object_name = 'hotel'
 
 
+class RoomDetailView(DetailView):
+    model = Room
+    template_name = 'hotels/room-detail.html'
+    context_object_name = 'room'
+
+
 class HotelViewSet(viewsets.ModelViewSet):
     queryset = Hotel.objects.all()
     serializer_class = HotelSerializer
