@@ -6,6 +6,7 @@ class Hotel(models.Model):
     address = models.TextField()
     description = models.TextField()
     rating = models.DecimalField(max_digits=5, decimal_places=2)
+    city = models.CharField(max_length=255, default='London')
 
     def __str__(self):
         return self.name
