@@ -12,9 +12,9 @@ class Hotel(models.Model):
 
 
 class RoomType(models.TextChoices):
-    SINGLE = 'Single', 'Одномісний'
-    DOUBLE = 'Double', 'Двомісний'
-    SUITE = 'Suite', 'Люкс'
+    SINGLE = 'Single', 'Single'
+    DOUBLE = 'Double', 'Double'
+    SUITE = 'Suite', 'Luxe'
 
 
 class Room(models.Model):
