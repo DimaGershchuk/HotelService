@@ -29,4 +29,5 @@ router.register(r'booking-room', BookingRoomViewSet)
 urlpatterns = [
     path('api/', include(router.urls)),
     path('admin/', admin.site.urls),
+    path('', include('Hotel.urls')),
 ]
