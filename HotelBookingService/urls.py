@@ -18,10 +18,13 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from Hotel.views import HotelViewSet, RoomViewSet
+from Booking.views import BookingViewSet, BookingRoomViewSet
 
 router = DefaultRouter()
 router.register(r'hotels', HotelViewSet)
 router.register(r'rooms', RoomViewSet)
+router.register(r'bookings', BookingViewSet)
+router.register(r'booking-room', BookingRoomViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),

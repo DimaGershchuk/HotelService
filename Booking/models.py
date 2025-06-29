@@ -8,9 +8,10 @@ class Booking(models.Model):
     check_in = models.DateTimeField()
     check_out = models.DateTimeField()
     total_price = models.IntegerField()
+    rooms = models.ManyToManyField(Room, through='BookingRoom', related_name='booked_in')
 
     def __str__(self):
-        return f"Booking by {self.customer}"
+        return f"Booking by {self.customer} from {self.check_in} till {self.check_out}"
 
 
 class BookingRoom(models.Model):

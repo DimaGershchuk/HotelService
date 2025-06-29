@@ -6,7 +6,7 @@ class Hotel(models.Model):
     address = models.TextField()
     description = models.TextField()
     rating = models.DecimalField(max_digits=5, decimal_places=2)
-    city = models.CharField(max_length=255, default='London')
+    city = models.CharField(max_length=255)
 
     def __str__(self):
         return self.name
@@ -28,7 +28,7 @@ class Room(models.Model):
     is_available = models.BooleanField()
 
     def __str__(self):
-        f"Room number {self.number} in hotel {self.hotel}"
+        return f"Room number {self.number} in hotel {self.hotel}"
 
 
 
