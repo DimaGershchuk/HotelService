@@ -5,6 +5,7 @@
   <div class="row">
     <div class="col-md-8">
       <h1>{{ hotel.name }}</h1>
+      <img src="{{hotel.image_thumbnail.url}}" alt="{{hotel.name}}">
       <p><strong>Адреса:</strong> {{ hotel.address }}</p>
       <p><strong>Рейтинг:</strong> {{ hotel.rating }}</p>
       <p>{{ hotel.description }}</p>
@@ -16,6 +17,7 @@
             Кімната №{{ room.number }} — {{ room.get_type_display }}
             (місць: {{ room.capacity }}, ціна за ніч: {{ room.price_per_night }})
           </a>
+          <img src="{{room.image_thumbnail.url}}" alt="{{room.name}}">
         {% empty %}
           <p class="text-muted">Немає доступних кімнат.</p>
         {% endfor %}
