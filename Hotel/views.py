@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from .models import Hotel, RoomType, Room
 from .serializers import HotelSerializer, RoomSerializer
@@ -11,7 +11,13 @@ class HotelListView(ListView):
     template_name = 'hotels/hotel-list.html'
     context_object_name = 'hotels'
     paginate_by = 10
-    
+
+
+class HotelDetailView(DetailView):
+    model = Hotel
+    template_name = 'hotels/hotel-detail.html'
+    context_object_name = 'hotel'
+
 
 class HotelViewSet(viewsets.ModelViewSet):
     queryset = Hotel.objects.all()

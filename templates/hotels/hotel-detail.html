@@ -1,10 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}{{ hotel.name }}{% endblock %}
 
-</body>
-</html>
+{% block content %}
+  <div class="row">
+    <div class="col-md-8">
+      <h1>{{ hotel.name }}</h1>
+      <p><strong>Адреса:</strong> {{ hotel.address }}</p>
+      <p><strong>Рейтинг:</strong> {{ hotel.rating }}</p>
+      <p>{{ hotel.description }}</p>
+
+      <h3>Кімнати</h3>
+      <div class="list-group">
+        {% for room in hotel.room_set.all %}
+          <a href="#" class="list-group-item list-group-item-action">
+            Кімната №{{ room.number }} — {{ room.get_type_display }}
+            (місць: {{ room.capacity }}, ціна за ніч: {{ room.price_per_night }})
+          </a>
+        {% empty %}
+          <p class="text-muted">Немає доступних кімнат.</p>
+        {% endfor %}
+      </div>
+
+      <a href="{% url 'hotel-list' %}" class="btn btn-secondary mt-4">Назад до списку</a>
+    </div>
+  </div>
+{% endblock %}
