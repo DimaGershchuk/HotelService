@@ -6,24 +6,24 @@
     <div class="col-md-8">
       <h1>{{ hotel.name }}</h1>
       <img src="{{hotel.image_thumbnail.url}}" alt="{{hotel.name}}">
-      <p><strong>Адреса:</strong> {{ hotel.address }}</p>
-      <p><strong>Рейтинг:</strong> {{ hotel.rating }}</p>
-      <p>{{ hotel.description }}</p>
+      <p><strong>Address :</strong> {{ hotel.address }}</p>
+      <p><strong>Rating :</strong> {{ hotel.rating }}</p>
+      <p><strong>Description :</strong> {{ hotel.description }}</p>
 
-      <h3>Кімнати</h3>
+      <h3>Rooms</h3>
       <div class="list-group">
         {% for room in hotel.room_set.all %}
           <a href="{% url 'room-detail' room.pk %}" class="list-group-item list-group-item-action">
-            Кімната №{{ room.number }} — {{ room.get_type_display }}
-            (місць: {{ room.capacity }}, ціна за ніч: {{ room.price_per_night }})
+            Room №{{ room.number }} — {{ room.get_type_display }}
+            (місць: {{ room.capacity }}, price per night : {{ room.price_per_night }})
           </a>
           <img src="{{room.image_thumbnail.url}}" alt="{{room.name}}">
         {% empty %}
-          <p class="text-muted">Немає доступних кімнат.</p>
+          <p class="text-muted">No rooms available.</p>
         {% endfor %}
       </div>
 
-      <a href="{% url 'hotel-list' %}" class="btn btn-secondary mt-4">Назад до списку</a>
+      <a href="{% url 'hotel-list' %}" class="btn btn-secondary mt-4">Back to list</a>
     </div>
   </div>
 {% endblock %}
