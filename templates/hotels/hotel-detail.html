@@ -1,29 +1,72 @@
 {% extends "base.html" %}
 {% block title %}{{ hotel.name }}{% endblock %}
 
+{% block extra_css %}
+<style>
+  /* Кастомні правки для detail-сторінки */
+  .hotel-header {
+    margin-bottom: 2rem;
+  }
+  .hotel-header img {
+    width: 100%;
+    border-radius: .5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .hotel-info p {
+    font-size: 1rem;
+    margin-bottom: .5rem;
+  }
+  .hotel-info strong {
+    color: #004085;
+  }
+  .rooms-list .list-group-item {
+    border: none;
+    border-radius: .5rem;
+    margin-bottom: .5rem;
+    transition: background-color .2s ease, transform .2s ease;
+  }
+  .rooms-list .list-group-item:hover {
+    background-color: rgba(0, 64, 133, 0.05);
+    transform: translateX(4px);
+  }
+  .rooms-list .list-group-item a {
+    text-decoration: none;
+    color: inherit;
+  }
+</style>
+{% endblock %}
+
 {% block content %}
-  <div class="row">
-    <div class="col-md-8">
-      <h1>{{ hotel.name }}</h1>
-      <img src="{{hotel.image_thumbnail.url}}" alt="{{hotel.name}}">
-      <p><strong>Address :</strong> {{ hotel.address }}</p>
-      <p><strong>Rating :</strong> {{ hotel.rating }}</p>
-      <p><strong>Description :</strong> {{ hotel.description }}</p>
+  <div class="hotel-header">
+    <h1 class="display-4">{{ hotel.name }}</h1>
+    <img src="{{ hotel.image_thumbnail.url }}" alt="{{ hotel.name }}">
+  </div>
 
-      <h3>Rooms</h3>
-      <div class="list-group">
-        {% for room in hotel.room_set.all %}
-          <a href="{% url 'room-detail' room.pk %}" class="list-group-item list-group-item-action">
-            Room №{{ room.number }} — {{ room.get_type_display }}
-            (місць: {{ room.capacity }}, price per night : {{ room.price_per_night }})
-          </a>
-          <img src="{{room.image_thumbnail.url}}" alt="{{room.name}}">
-        {% empty %}
-          <p class="text-muted">No rooms available.</p>
-        {% endfor %}
-      </div>
+  <div class="hotel-info mb-4">
+    <p><strong>Address:</strong> {{ hotel.address }}</p>
+    <p><strong>Rating:</strong> {{ hotel.rating }}</p>
+    <p><strong>Description:</strong> {{ hotel.description }}</p>
+  </div>
 
-      <a href="{% url 'hotel-list' %}" class="btn btn-secondary mt-4">Back to list</a>
+  <div class="rooms-list mb-5">
+    <h3 class="mb-3">Rooms</h3>
+    <div class="list-group">
+      {% for room in hotel.room_set.all %}
+        <a href="{% url 'room-detail' room.pk %}"
+           class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+          <div>
+            <i class="bi bi-door-closed-fill me-2"></i>
+            {{ room.get_type_display }}<br>
+          </div>
+          <span class="badge bg-primary rounded-pill">{{ room.price_per_night }} ₴</span>
+        </a>
+      {% empty %}
+        <p class="text-muted">No rooms available.</p>
+      {% endfor %}
     </div>
   </div>
+
+  <a href="{% url 'hotel-list' %}" class="btn btn-outline-secondary">
+    <i class="bi bi-arrow-left-circle me-1"></i> Back to list
+  </a>
 {% endblock %}

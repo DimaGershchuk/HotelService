@@ -22,30 +22,29 @@ class Hotel(models.Model):
 
 
 class RoomType(models.TextChoices):
-    SINGLE = 'Single', 'Single'
-    DOUBLE = 'Double', 'Double'
+    SINGLE = 'For two person', 'Single bed'
+    DOUBLE = 'For three and four', 'Two beds'
     SUITE = 'Suite', 'Luxe'
 
 
 class Room(models.Model):
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
-    number = models.SmallIntegerField()
-    type = models.CharField(max_length=10, choices=RoomType.choices, default=RoomType.SINGLE,
+    room_name = models.CharField(default='Deluxe')
+    type = models.CharField(max_length=20, choices=RoomType.choices, default=RoomType.SINGLE,
                             verbose_name='Room type')
-    capacity = models.SmallIntegerField()
     price_per_night = models.IntegerField()
     is_available = models.BooleanField()
 
     image = models.ImageField(upload_to='images', blank=True, null=True)
     image_thumbnail = ImageSpecField(
         source='image',
-        processors=[ResizeToFill(350, 350)],
+        processors=[ResizeToFill(250, 250)],
         format='JPEG',
         options={'quality': 95}
     )
 
     def __str__(self):
-        return f"Room number {self.number} in hotel {self.hotel}"
+        return f"Room {self.room_name} in hotel {self.hotel}"
 
 
 

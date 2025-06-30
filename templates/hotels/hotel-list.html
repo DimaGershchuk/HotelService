@@ -5,6 +5,24 @@
 {% block content %}
   <h1>Our Hotels around the world!</h1>
 
+  <form method="get" class="search-bar d-flex align-items-center mb-4">
+      <div class="input-group me-2 flex-fill">
+        {{ search_form.city }}
+      </div>
+      <div class="input-group me-2">
+        {{ search_form.check_in }}
+      </div>
+      <div class="input-group me-2">
+        {{ search_form.check_out }}
+      </div>
+      <div class="input-group me-2 guest-input">
+        {{ search_form.adults }}<span class="mx-1">adult.</span>
+        {{ search_form.children }}<span class="mx-1">kids.</span>
+        {{ search_form.rooms }}<span class="mx-1">rooms.</span>
+      </div>
+      <button type="submit" class="btn btn-primary px-4">Search</button>
+  </form>
+
   <div class="row">
     {% for hotel in hotels %}
       <div class="col-md-4 mb-4">
@@ -47,4 +65,14 @@
       </ul>
     </nav>
   {% endif %}
+{% endblock %}
+
+{% block extra_js %}
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+      flatpickr(".datepicker", {
+        dateFormat: "d-m-Y",
+        locale: "uk"
+      });
+    </script>
 {% endblock %}

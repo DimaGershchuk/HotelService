@@ -1,16 +1,76 @@
 {% extends "base.html" %}
-{% block title %}{{ hotel.name }}{% endblock %}
+{% block title %}{{ room.get_type_display }}{% endblock %}
+
+{% block extra_css %}
+<style>
+  .room-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  @media(min-width: 768px) {
+    .room-card {
+      flex-direction: row;
+    }
+  }
+  .room-image {
+    flex: 1;
+    border-radius: .5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+  }
+  .room-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: .75rem;
+  }
+  .room-info h1 {
+    font-size: 2rem;
+    color: #004085;
+    margin-bottom: .75rem;
+  }
+  .room-info p {
+    font-size: 1.1rem;
+    margin: 0;
+  }
+  .room-info p strong {
+    color: #004085;
+  }
+  .btn-back {
+    align-self: start;
+    margin-top: 1.25rem;
+    background-color: #6c757d;
+    border-color: #6c757d;
+    transition: background-color .2s ease;
+  }
+  .btn-back:hover {
+    background-color: #545b62;
+    border-color: #545b62;
+  }
+</style>
+{% endblock %}
 
 {% block content %}
-  <div class="row">
-    <div class="col-md-8">
-      <h1>Room number: {{ room.number }}</h1>
-      <p><strong>Room type :</strong> {{ room.type }}</p>
-      <p><strong>Capacity :</strong> {{ room.capacity }}</p>
-      <p><strong>Price :</strong> {{ room.price_per_night }}</p>
-      <img src="{{room.image_thumbnail.url}}" alt="{{room.name}}">
-
-      <a href="{% url 'hotel-list' %}" class="btn btn-secondary mt-4">Назад до списку</a>
+  <div class="room-card card p-4 shadow-sm">
+    <img src="{{ room.image_thumbnail.url }}" alt="Room {{ room.number }}" class="room-image">
+    <div class="room-info">
+      <h1>{{ room.get_type_display }}</h1>
+      <p><strong>Тип кімнати:</strong> {{ room.get_type_display }}</p>
+      <p><strong>Ціна за ніч:</strong> {{ room.price_per_night }} ₴</p>
+      <p><strong>Доступна:</strong>
+        {% if room.is_available %}
+          <span class="text-success">Так</span>
+        {% else %}
+          <span class="text-danger">Ні</span>
+        {% endif %}
+      </p>
+      <a href="{% url 'hotel-detail' room.hotel.pk %}" class="btn btn-back">
+        <i class="bi bi-arrow-left-circle me-1"></i> Назад до готелю
+      </a>
     </div>
   </div>
 {% endblock %}
