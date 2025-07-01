@@ -1,57 +1,6 @@
 {% extends "base.html" %}
 {% block title %}{{ room.get_type_display }}{% endblock %}
 
-{% block extra_css %}
-<style>
-  .room-card {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  @media(min-width: 768px) {
-    .room-card {
-      flex-direction: row;
-    }
-  }
-  .room-image {
-    flex: 1;
-    border-radius: .5rem;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    object-fit: cover;
-  }
-  .room-info {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: .75rem;
-  }
-  .room-info h1 {
-    font-size: 2rem;
-    color: #004085;
-    margin-bottom: .75rem;
-  }
-  .room-info p {
-    font-size: 1.1rem;
-    margin: 0;
-  }
-  .room-info p strong {
-    color: #004085;
-  }
-  .btn-back {
-    align-self: start;
-    margin-top: 1.25rem;
-    background-color: #6c757d;
-    border-color: #6c757d;
-    transition: background-color .2s ease;
-  }
-  .btn-back:hover {
-    background-color: #545b62;
-    border-color: #545b62;
-  }
-</style>
-{% endblock %}
-
 {% block content %}
   <div class="room-card card p-4 shadow-sm">
     <div class="room-info">

@@ -22,16 +22,15 @@
         {{ search_form.max_price }}
       </div>
       <div class="input-group me-2 guest-input">
-        {{ search_form.adults }}<span class="mx-1">adult.</span>
-        {{ search_form.children }}<span class="mx-1">kids.</span>
-        {{ search_form.rooms }}<span class="mx-1">rooms.</span>
+        {{ search_form.adults }}<span class="mx-1"></span>
+        {{ search_form.rooms }}<span class="mx-1"></span>
       </div>
       <button type="submit" class="btn btn-primary px-4">Search</button>
   </form>
 
   <div class="row">
     {% for hotel in hotels %}
-      <div class="col-md-4 mb-4">
+      <div class="col-md-4 mb-4 hotel-card">
         <div class="card h-100">
           <div class="card-body">
             <h5 class="card-title">{{ hotel.name }}</h5>

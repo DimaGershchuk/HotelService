@@ -1,3 +1,57 @@
-.container mt-4{
-    max-width: 70%;
+.mt-4{
+    max-width: 50%;
+}
+
+.hotel-card{
+   max-width: 500px;
+}
+
+.room-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+ }
+
+@media(min-width: 768px) {
+    .room-card {
+      flex-direction: row;
+    }
+}
+.room-image {
+    flex: 1;
+    border-radius: .5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    object-fit: cover;
+    max-width: 250px;
+    max-height: 250px;
+}
+.room-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: .75rem;
+}
+.room-info h1 {
+    font-size: 2rem;
+    color: #004085;
+    margin-bottom: .75rem;
+}
+.room-info p {
+    font-size: 1.1rem;
+    margin: 0;
+}
+.room-info p strong {
+    color: #004085;
+}
+.btn-back {
+    align-self: start;
+    margin-top: 1.25rem;
+    background-color: #6c757d;
+    border-color: #6c757d;
+    transition: background-color .2s ease;
+}
+.btn-back:hover {
+    background-color: #545b62;
+    border-color: #545b62;
 }

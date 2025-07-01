@@ -33,6 +33,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('Hotel.urls')),
     path('booking/', include('Booking.urls')),
+    path('users/', include('Customer.urls')),
 ]
 
 if settings.DEBUG:
