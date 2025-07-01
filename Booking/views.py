@@ -1,7 +1,54 @@
-from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import render, redirect
+from django.views.generic import FormView, DetailView
 from rest_framework import viewsets, permissions
+
+from Hotel.models import Room
 from .models import Booking, BookingRoom
 from .serializers import BookingRoomSerializer, BookingSerializer
+from .forms import BookingForm
+from django.shortcuts import get_object_or_404
+
+
+class BookingCreateView(LoginRequiredMixin, FormView):
+    template_name = 'bookings/booking-form.html'
+    form_class = BookingForm
+
+    def dispatch(self, request, *args, **kwargs):
+        self.room = get_object_or_404(Room, pk=kwargs['pk'])
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **ctx):
+        ctx = super().get_context_data(**ctx)
+        ctx['room'] = self.room
+        return ctx
+
+    def form_valid(self, form):
+        cd = form.cleaned_data
+        nights = (cd['check_out'] - cd['check_in']).days
+        total = nights * self.room.price_per_night
+        customer_obj = self.request.user
+
+        booking = Booking.objects.create(customer=customer_obj,
+                                         check_in=cd['check_in'],
+                                         check_out=cd['check_out'],
+                                         total_price=total
+                                         )
+        BookingRoom.objects.create(booking=booking, room=self.room)
+        return redirect('booking-detail', pk=booking.pk)
+
+
+class BookingDetailView(LoginRequiredMixin, DetailView):
+    model = Booking
+    template_name = 'bookings/booking-detail.html'
+    context_object_name = 'booking'
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        user = self.request.user
+        if user.is_staff:
+            return qs
+        return qs.filter(customer__user=user)
 
 
 class BookingViewSet(viewsets.ModelViewSet):

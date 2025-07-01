@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Booking: {{ room.get_type_display }}{% endblock %}
+
+{% block content %}
+<div class="card p-4 shadow-sm mx-auto" style="max-width: 500px;">
+  <h2 class="mb-4">Booking room</h2>
+  <p><strong>Hotel:</strong> {{ room.hotel.name }}</p>
+  <p><strong>Room:</strong> {{ room.get_type_display }}</p>
+  <form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label class="form-label">Check in</label>
+      {{ form.check_in }}
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Check out</label>
+      {{ form.check_out }}
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Confirm booking</button>
+  </form>
+</div>
+{% endblock %}

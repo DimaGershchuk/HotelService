@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Confirm: Booking #{{ booking.pk }}{% endblock %}
+
+{% block content %}
+<div class="card p-4 shadow mx-auto" style="max-width:600px;">
+  <h2 class="mb-3">Booking confirm</h2>
+  <p><strong>Booking number:</strong> {{ booking.pk }}</p>
+  <p><strong>Hotel:</strong> {{ booking.customer }}</p>
+  <p>
+    <strong>Room:</strong>
+    {{ booking.bookingroom_set.all.0.room.get_type_display }}
+  </p>
+  <p><strong>Check in:</strong> {{ booking.check_in }}</p>
+  <p><strong>Check out:</strong> {{ booking.check_out }}</p>
+  <p><strong>Nights:</strong> {{ booking.bookingroom_set.all.0.room.price_per_night }}</p>
+  <p><strong>Sum:</strong> {{ booking.total_price }} ₴</p>
+
+  <a href="{% url 'hotel-list' %}" class="btn btn-outline-secondary mt-3">
+    <i class="bi bi-house-door me-1"></i> Main page
+  </a>
+</div>
+{% endblock %}

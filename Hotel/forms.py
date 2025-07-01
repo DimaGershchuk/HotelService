@@ -24,6 +24,14 @@ class SearchForm(forms.Form):
             'placeholder': 'Check out'
         })
     )
+
+    min_price = forms.IntegerField(required=False, widget=forms.NumberInput(attrs={
+        'class': 'form-control', 'placeholder': 'From ₴'
+    }))
+    max_price = forms.IntegerField(required=False, widget=forms.NumberInput(attrs={
+        'class': 'form-control', 'placeholder': 'to ₴'
+    }))
+
     adults = forms.IntegerField(
         min_value=1, initial=1,
         widget=forms.NumberInput(attrs={

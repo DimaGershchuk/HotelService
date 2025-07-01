@@ -21,6 +21,12 @@ class HotelListView(ListView):
             cd = form.cleaned_data
             if cd['city']:
                 qs = qs.filter(city__icontains=cd['city'])
+
+            if cd.get('min_price') is not None:
+                qs = qs.filter(room__price_per_night__gte=cd['min_price'])
+            if cd.get('max_price') is not None:
+                qs = qs.filter(room__price_per_night__lte=cd['max_price'])
+            qs = qs.distinct()
         return qs
 
     def get_context_data(self, **kwargs):

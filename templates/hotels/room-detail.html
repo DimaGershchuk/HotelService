@@ -17,8 +17,6 @@
     flex: 1;
     border-radius: .5rem;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    width: 250px;
-    height: 250px;
     object-fit: cover;
   }
   .room-info {
@@ -56,21 +54,25 @@
 
 {% block content %}
   <div class="room-card card p-4 shadow-sm">
-    <img src="{{ room.image_thumbnail.url }}" alt="Room {{ room.number }}" class="room-image">
     <div class="room-info">
+       <img src="{{ room.image_thumbnail.url }}" alt="Room {{ room.number }}" class="room-image">
       <h1>{{ room.get_type_display }}</h1>
-      <p><strong>Тип кімнати:</strong> {{ room.get_type_display }}</p>
-      <p><strong>Ціна за ніч:</strong> {{ room.price_per_night }} ₴</p>
-      <p><strong>Доступна:</strong>
+      <p><strong>Room type:</strong> {{ room.get_type_display }}</p>
+      <p><strong>Price per night:</strong> {{ room.price_per_night }} ₴</p>
+      <p><strong>Available:</strong>
         {% if room.is_available %}
-          <span class="text-success">Так</span>
+          <span class="text-success">Yes</span>
         {% else %}
-          <span class="text-danger">Ні</span>
+          <span class="text-danger">No</span>
         {% endif %}
       </p>
-      <a href="{% url 'hotel-detail' room.hotel.pk %}" class="btn btn-back">
-        <i class="bi bi-arrow-left-circle me-1"></i> Назад до готелю
-      </a>
+      <div><a href="{% url 'room-book' room.pk %}" class="btn btn-primary mt-3">
+        <i class="bi bi-calendar-check me-1"></i>Book
+      </a></div>
+
+      <div><a href="{% url 'hotel-detail' room.hotel.pk %}" class="btn btn-back">
+        <i class="bi bi-arrow-left-circle me-1"></i> Back to hotel list
+      </a></div>
     </div>
   </div>
 {% endblock %}

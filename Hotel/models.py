@@ -38,7 +38,7 @@ class Room(models.Model):
     image = models.ImageField(upload_to='images', blank=True, null=True)
     image_thumbnail = ImageSpecField(
         source='image',
-        processors=[ResizeToFill(250, 250)],
+        processors=[ResizeToFill(350, 350)],
         format='JPEG',
         options={'quality': 95}
     )
