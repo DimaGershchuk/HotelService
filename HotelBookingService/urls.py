@@ -32,6 +32,7 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('admin/', admin.site.urls),
     path('', include('Hotel.urls')),
+    path('booking/', include('Booking.urls')),
 ]
 
 if settings.DEBUG:
