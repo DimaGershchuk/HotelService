@@ -17,6 +17,9 @@ class HotelListView(ListView):
     def get_queryset(self):
         qs = super().get_queryset()
         form = SearchForm(self.request.GET)
+        if not form.is_valid():
+            print(form.errors)
+            
         if form.is_valid():
             cd = form.cleaned_data
             if cd['city']:

@@ -12,6 +12,7 @@ class SearchForm(forms.Form):
     )
     check_in = forms.DateField(
         required=False,
+        input_formats=['%d-%m-%Y'],
         widget=forms.TextInput(attrs={
             'class': 'form-control datepicker',
             'placeholder': 'Check in'
@@ -19,6 +20,7 @@ class SearchForm(forms.Form):
     )
     check_out = forms.DateField(
         required=False,
+        input_formats=['%d-%m-%Y'],
         widget=forms.TextInput(attrs={
             'class': 'form-control datepicker',
             'placeholder': 'Check out'
@@ -39,13 +41,7 @@ class SearchForm(forms.Form):
             'placeholder': 'Adults'
         })
     )
-    children = forms.IntegerField(
-        min_value=0, initial=0,
-        widget=forms.NumberInput(attrs={
-            'class': 'form-control',
-            'placeholder': 'Kids'
-        })
-    )
+    
     rooms = forms.IntegerField(
         min_value=1, initial=1,
         widget=forms.NumberInput(attrs={
