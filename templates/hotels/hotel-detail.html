@@ -1,41 +1,6 @@
 {% extends "base.html" %}
 {% block title %}{{ hotel.name }}{% endblock %}
 
-{% block extra_css %}
-<style>
-  /* Кастомні правки для detail-сторінки */
-  .hotel-header {
-    margin-bottom: 2rem;
-  }
-  .hotel-header img {
-    width: 100%;
-    border-radius: .5rem;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  }
-  .hotel-info p {
-    font-size: 1rem;
-    margin-bottom: .5rem;
-  }
-  .hotel-info strong {
-    color: #004085;
-  }
-  .rooms-list .list-group-item {
-    border: none;
-    border-radius: .5rem;
-    margin-bottom: .5rem;
-    transition: background-color .2s ease, transform .2s ease;
-  }
-  .rooms-list .list-group-item:hover {
-    background-color: rgba(0, 64, 133, 0.05);
-    transform: translateX(4px);
-  }
-  .rooms-list .list-group-item a {
-    text-decoration: none;
-    color: inherit;
-  }
-</style>
-{% endblock %}
-
 {% block content %}
   <div class="hotel-header">
     <h1 class="display-4">{{ hotel.name }}</h1>

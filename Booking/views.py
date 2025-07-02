@@ -25,9 +25,16 @@ class BookingCreateView(LoginRequiredMixin, FormView):
 
     def form_valid(self, form):
         cd = form.cleaned_data
+        ci, co = cd['check_in'], cd['check_out']
         nights = (cd['check_out'] - cd['check_in']).days
         total = nights * self.room.price_per_night
         customer_obj = self.request.user
+
+        conflict = Booking.objects.filter(bookingroom__room=self.room, check_in__lt=co, check_out__gt=ci,).exists()
+
+        if conflict:
+            form.add_error(None, "This room has been booked already for these dates.")
+            return self.form_invalid(form)
 
         booking = Booking.objects.create(customer=customer_obj,
                                          check_in=cd['check_in'],
