@@ -15,8 +15,9 @@
 
   <div class="rooms-list mb-5">
     <h3 class="mb-3">Rooms</h3>
+    {% if available_rooms %}
     <div class="list-group">
-      {% for room in hotel.room_set.all %}
+      {% for room in available_rooms %}
         <a href="{% url 'room-detail' room.pk %}"
            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
           <div>
@@ -28,6 +29,7 @@
       {% empty %}
         <p class="text-muted">No rooms available.</p>
       {% endfor %}
+      {% endif %}
     </div>
   </div>
 

@@ -43,6 +43,30 @@ class HotelDetailView(DetailView):
     template_name = 'hotels/hotel-detail.html'
     context_object_name = 'hotel'
 
+    def get_context_data(self, **ctx):
+        ctx = super().get_context_data(**ctx)
+
+        hotel = self.object
+        check_in_str = self.request.GET.get('check_in')
+        check_out_str = self.request.GET.get('check_out')
+
+        rooms_qs = hotel.room_set.all()
+
+        if check_in_str and check_out_str:
+            try:
+                ci = datetime.strptime(check_in_str, '%Y-%m-%d').date()
+                co = datetime.strptime(check_out_str, '%Y-%m-%d').date()
+
+                rooms_qs = room_qs.exclude(bookingroom__booking__check_in__lt = co,
+                                          bookingroom__booking__check_out__gt = ci)
+            except ValueError:
+                pass
+
+        ctx['available_rooms'] = rooms_qs.distinct()
+        ctx['check_in'] = check_in_str
+        ctx['check_out'] = check_out_str
+        return ctx
+
 
 class RoomDetailView(DetailView):
     model = Room

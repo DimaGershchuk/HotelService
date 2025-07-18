@@ -344,3 +344,48 @@
 .login-form .form-footer a:hover {
   text-decoration: underline;
 }
+
+.search-bar {
+  background: #fff;
+  border: 1px solid #e2e5e9;
+  border-radius: .5rem;
+  padding: .75rem;
+}
+
+.search-bar .form-control {
+  height: calc(2.5rem + 2px);
+  box-shadow: none;
+  border-radius: .5rem;
+}
+
+.search-bar .form-control:focus {
+  border-color: #0062cc;
+}
+
+.search-bar .btn-primary {
+  height: calc(2.5rem + 2px);
+  border-radius: .5rem;
+  font-weight: 500;
+}
+
+.search-bar .datepicker {
+  max-width: 130px;
+}
+
+.search-bar input.text-center {
+  max-width:150px;
+}
+
+@media (max-width: 768px) {
+  .search-bar {
+    flex-wrap: wrap;
+  }
+  .search-bar .col-auto {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+  .search-bar .col-auto:last-child {
+    text-align: right;
+  }
+}
+
