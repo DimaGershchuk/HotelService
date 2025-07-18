@@ -2,8 +2,46 @@
     max-width: 50%;
 }
 
-.hotel-card{
-   max-width: 500px;
+.hotel-card .card {
+  border: none;
+  border-radius: .75rem;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: transform .3s, box-shadow .3s;
+  height: 100%;
+}
+
+.hotel-card .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+.hotel-card .card-img-top {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.hotel-card .card-body {
+  padding: 1rem 1.25rem;
+}
+
+.hotel-card .card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: .75rem;
+}
+
+.hotel-card .card-text {
+  font-size: .95rem;
+  color: #555;
+  margin-bottom: .5rem;
+}
+
+.hotel-card .card-footer {
+  background: #fff;
+  border-top: none;
+  padding: .75rem 1.25rem;
 }
 
 .room-card {
@@ -56,34 +94,33 @@
     border-color: #545b62;
 }
 
-  .hotel-header {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-  .hotel-header img {
-    width: 50%;
-    max-height: 400px;
-    object-fit: cover;
-    border-radius: .5rem;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-    margin-top: 1rem;
-  }
-  /* Info block */
-  .hotel-info {
-    background: #fff;
-    padding: 1.5rem;
-    border-radius: .5rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  }
-  .hotel-info p {
-    font-size: 1.1rem;
-    margin-bottom: .75rem;
-  }
-  .hotel-info strong {
-    color: #004085;
-    width: 120px;
-    display: inline-block;
-  }
+.hotel-header img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: .5rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  margin-bottom: 1.5rem;
+}
+
+.hotel-info {
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: .5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  margin-bottom: 2rem;
+}
+
+.hotel-info p {
+  font-size: 1rem;
+  margin-bottom: .75rem;
+}
+
+.hotel-info strong {
+  display: inline-block;
+  width: 100px;
+  color: #004085;
+}
   /* Rooms list */
   .rooms-list h3 {
     font-weight: 600;
@@ -116,3 +153,194 @@
     padding: .5rem 1rem;
     border-radius: .5rem;
   }
+
+  /* Обгортка форми */
+.auth-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 2rem;
+}
+
+/* Контейнер самої форми */
+.register-form {
+  background: #ffffff;
+  padding: 2.5rem 2rem;
+  border-radius: .75rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 420px;
+}
+
+/* Заголовок */
+.form-title {
+  text-align: center;
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+  color: #004085;
+  font-weight: 600;
+}
+
+/* Група полів */
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: .5rem;
+  color: #333;
+}
+
+.form-group input {
+  width: 100%;
+  padding: .75rem 1rem;
+  border: 1px solid #ced4da;
+  border-radius: .5rem;
+  font-size: 1rem;
+  transition: border-color .2s;
+}
+
+.form-group input:focus {
+  border-color: #0062cc;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
+}
+
+/* help text */
+.form-text {
+  margin-top: .25rem;
+  color: #6c757d;
+  font-size: .875rem;
+}
+
+/* Помилки */
+.error {
+  margin-top: .25rem;
+  font-size: .875rem;
+  color: #dc3545;
+}
+
+/* Кнопка реєстрації */
+.register-btn {
+  width: 100%;
+  padding: .75rem;
+  font-size: 1.05rem;
+  background-color: #0062cc;
+  border: none;
+  border-radius: .5rem;
+  color: #fff;
+  font-weight: 500;
+  transition: background-color .2s, transform .1s;
+}
+
+.register-btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-1px);
+}
+
+/* Підпис під формою */
+.form-footer {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: .95rem;
+  color: #555;
+}
+
+.form-footer a {
+  color: #0062cc;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.form-footer a:hover {
+  text-decoration: underline;
+}
+
+.login-form {
+  background: #ffffff;
+  padding: 2rem 1.5rem;
+  border-radius: .75rem;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+  width: 100%;
+  max-width: 380px;
+}
+
+.login-form .form-title {
+  text-align: center;
+  font-size: 1.75rem;
+  margin-bottom: 1.25rem;
+  color: #004085;
+  font-weight: 600;
+}
+
+.login-form .form-group {
+  margin-bottom: 1rem;
+}
+
+.login-form label {
+  display: block;
+  margin-bottom: .5rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.login-form input {
+  width: 100%;
+  padding: .65rem 1rem;
+  border: 1px solid #ced4da;
+  border-radius: .5rem;
+  font-size: 1rem;
+  background: #f8f9fa;
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.login-form input:focus {
+  border-color: #0062cc;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0,123,255,0.2);
+}
+
+.login-form .error {
+  margin-top: .25rem;
+  font-size: .875rem;
+  color: #dc3545;
+}
+
+/* ==== BUTTON ==== */
+.login-btn {
+  width: 100%;
+  padding: .75rem;
+  font-size: 1.05rem;
+  background-color: #0062cc;
+  border: none;
+  border-radius: .5rem;
+  color: #fff;
+  font-weight: 500;
+  transition: background-color .2s, transform .1s;
+}
+
+.login-btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-1px);
+}
+
+/* ==== FOOTER ==== */
+.login-form .form-footer {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: .95rem;
+  color: #555;
+}
+
+.login-form .form-footer a {
+  color: #0062cc;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.login-form .form-footer a:hover {
+  text-decoration: underline;
+}
