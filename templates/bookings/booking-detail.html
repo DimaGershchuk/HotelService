@@ -12,7 +12,6 @@
   </p>
   <p><strong>Check in:</strong> {{ booking.check_in }}</p>
   <p><strong>Check out:</strong> {{ booking.check_out }}</p>
-  <p><strong>Nights:</strong> {{ booking.bookingroom_set.all.0.room.price_per_night }}</p>
   <p><strong>Sum:</strong> {{ booking.total_price }} ₴</p>
 
   <a href="{% url 'hotel-list' %}" class="btn btn-outline-secondary mt-3">

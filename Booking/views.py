@@ -21,6 +21,9 @@ class BookingCreateView(LoginRequiredMixin, FormView):
     def get_context_data(self, **ctx):
         ctx = super().get_context_data(**ctx)
         ctx['room'] = self.room
+        ctx['check_in']  = self.request.GET.get('check_in')
+        ctx['check_out'] = self.request.GET.get('check_out')
+        ctx['adults'] = self.request.GET.get('adults')
         return ctx
 
     def form_valid(self, form):

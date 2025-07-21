@@ -3,12 +3,14 @@ from django import forms
 
 class BookingForm(forms.Form):
     check_in = forms.DateField(
+        input_formats=['%d-%m-%Y'],
         widget=forms.DateInput(attrs={
             'type': 'date',
             'class': 'form-control'
         })
     )
     check_out = forms.DateField(
+        input_formats=['%d-%m-%Y'],
         widget=forms.DateInput(attrs={
             'type': 'date',
             'class': 'form-control'

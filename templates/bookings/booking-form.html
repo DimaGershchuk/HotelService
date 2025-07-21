@@ -6,6 +6,9 @@
   <h2 class="mb-4">Booking room</h2>
   <p><strong>Hotel:</strong> {{ room.hotel.name }}</p>
   <p><strong>Room:</strong> {{ room.get_type_display }}</p>
+  <p><strong>Check in:</strong> {{ check_in }}</p>
+  <p><strong>Check in:</strong> {{ check_out }}</p>
+  <p><strong>Adults:</strong> {{ adults }}</p>
   <form method="post">
     {% csrf_token %}
       {% if form.non_field_errors %}
@@ -15,15 +18,9 @@
           {% endfor %}
         </div>
       {% endif %}
-
-    <div class="mb-3">
-      <label class="form-label">Check in</label>
-      {{ form.check_in }}
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Check out</label>
-      {{ form.check_out }}
-    </div>
+    <input type="hidden" name="check_in"  value="{{ check_in }}">
+    <input type="hidden" name="check_out" value="{{ check_out }}">
+    <input type="hidden" name="adults" value="{{ adults }}">
     <button type="submit" class="btn btn-primary w-100">Confirm booking</button>
   </form>
 </div>

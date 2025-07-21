@@ -1,5 +1,9 @@
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
 .mt-4{
-    max-width: 50%;
+    max-width: 70%;
 }
 
 .hotel-card .card {
@@ -27,6 +31,7 @@
 }
 
 .hotel-card .card-title {
+  font-family: 'Poppins', sans-serif;
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: .75rem;
@@ -69,6 +74,7 @@
     flex-direction: column;
     justify-content: center;
     gap: .75rem;
+    align-items: center;
 }
 .room-info h1 {
     font-size: 2rem;
@@ -95,7 +101,7 @@
 }
 
 .hotel-header img {
-  width: 100%;
+  width: 300px;
   max-height: 300px;
   object-fit: cover;
   border-radius: .5rem;
