@@ -26,13 +26,12 @@
           </div>
           <span class="badge bg-primary rounded-pill">{{ room.price_per_night }} ₴</span>
         </a>
-      {% empty %}
-        <p class="text-muted">No rooms available.</p>
       {% endfor %}
-      {% endif %}
     </div>
-  </div>
-
+    {% else %}
+      <p class="text-muted">No rooms available for these dates.</p>
+    {% endif %}
+    </div>
   <a href="{% url 'hotel-list' %}" class="btn btn-outline-secondary">
     <i class="bi bi-arrow-left-circle me-1"></i> Back to list
   </a>

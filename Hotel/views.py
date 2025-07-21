@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import ListView, DetailView
-
+from datetime import datetime
 from .models import Hotel, RoomType, Room
 from .serializers import HotelSerializer, RoomSerializer
 from rest_framework import generics, permissions, viewsets
@@ -54,11 +54,11 @@ class HotelDetailView(DetailView):
 
         if check_in_str and check_out_str:
             try:
-                ci = datetime.strptime(check_in_str, '%Y-%m-%d').date()
-                co = datetime.strptime(check_out_str, '%Y-%m-%d').date()
+                ci = datetime.strptime(check_in_str, '%d-%m-%Y').date()
+                co = datetime.strptime(check_out_str, '%d-%m-%Y').date()
 
-                rooms_qs = room_qs.exclude(bookingroom__booking__check_in__lt = co,
-                                          bookingroom__booking__check_out__gt = ci)
+                rooms_qs = rooms_qs.exclude(bookingroom__booking__check_in__lt = co,
+                                          bookingroom__booking__check_out__gt = ci,)
             except ValueError:
                 pass
 

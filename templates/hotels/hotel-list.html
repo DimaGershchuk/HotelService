@@ -42,7 +42,7 @@
             </p>
           </div>
           <div class="card-footer">
-            <a href="{% url 'hotel-detail' hotel.pk %}" class="btn btn-primary">Details</a>
+            <a href="{% url 'hotel-detail' hotel.pk %}?{{ request.GET.urlencode }}" class="btn btn-primary">Details</a>
           </div>
         </div>
       </div>
