@@ -58,7 +58,7 @@ class BookingDetailView(LoginRequiredMixin, DetailView):
         user = self.request.user
         if user.is_staff:
             return qs
-        return qs.filter(customer__user=user)
+        return qs.filter(customer=user)
 
 
 class BookingViewSet(viewsets.ModelViewSet):
@@ -70,7 +70,7 @@ class BookingViewSet(viewsets.ModelViewSet):
         user = self.request.user
         if user.is_staff:
             return Booking.objects.all()
-        return Booking.objects.filter(customer__user=user)
+        return Booking.objects.filter(customer=user)
 
 
 class BookingRoomViewSet(viewsets.ModelViewSet):
@@ -82,4 +82,4 @@ class BookingRoomViewSet(viewsets.ModelViewSet):
         user = self.request.user
         if user.is_staff:
             return BookingRoom.objects.all()
-        return BookingRoom.objects.filter(booking__customer__user=user)
+        return BookingRoom.objects.filter(booking__customer=user)

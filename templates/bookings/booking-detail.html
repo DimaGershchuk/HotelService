@@ -4,7 +4,7 @@
 {% block content %}
 <div class="card p-4 shadow mx-auto" style="max-width:600px;">
   <h2 class="mb-3">Booking confirm</h2>
-  <p><strong>Booking number:</strong> {{ booking.pk }}</p>
+  <p>Booking by {{ booking.customer }} from {{ booking.check_in }} till {{ booking.check_out }}</p>
   <p><strong>Hotel:</strong> {{ booking.customer }}</p>
   <p>
     <strong>Room:</strong>
