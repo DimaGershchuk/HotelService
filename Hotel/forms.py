@@ -35,7 +35,7 @@ class SearchForm(forms.Form):
     }))
 
     adults = forms.IntegerField(
-        min_value=1, initial=1,
+        min_value=1, initial=1, required=False,
         widget=forms.NumberInput(attrs={
             'class': 'form-control',
             'placeholder': 'Adults'
@@ -43,7 +43,7 @@ class SearchForm(forms.Form):
     )
     
     rooms = forms.IntegerField(
-        min_value=1, initial=1,
+        min_value=1, initial=1,required=False,
         widget=forms.NumberInput(attrs={
             'class': 'form-control',
             'placeholder': 'Rooms'
