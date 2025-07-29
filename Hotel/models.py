@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 
@@ -47,6 +48,21 @@ class Room(models.Model):
         return f"Room {self.room_name} in hotel {self.hotel}"
 
 
+class HotelReview(models.Model):
+    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name='reviews')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    rating  = models.PositiveSmallIntegerField(choices=[(i, i) for i in range(1, 6)])
+    comment = models.TextField(max_length=2_000)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created']
+        constraints = [
+            models.UniqueConstraint(fields=['hotel', 'author'], name='unique_review_per_user')
+        ]
+
+    def __str__(self):
+        return f'{self.hotel} – {self.rating}★ by {self.author}'
 
 
 

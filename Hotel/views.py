@@ -1,8 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import FormMixin
 from datetime import datetime
-from .models import Hotel, RoomType, Room
+from .models import Hotel, RoomType, Room, HotelReview
+from .forms import ReviewForm
+from django.urls import reverse
+from django.shortcuts import get_object_or_404
 from .serializers import HotelSerializer, RoomSerializer
 from rest_framework import generics, permissions, viewsets
 from .forms import SearchForm
@@ -38,10 +43,14 @@ class HotelListView(ListView):
         return ctx
 
 
-class HotelDetailView(DetailView):
+class HotelDetailView(FormMixin, DetailView):
     model = Hotel
     template_name = 'hotels/hotel-detail.html'
     context_object_name = 'hotel'
+    form_class = ReviewForm
+
+    def get_success_url(self):
+        return reverse('hotel-detail', kwargs={'pk': self.object.pk})
 
     def get_context_data(self, **ctx):
         ctx = super().get_context_data(**ctx)
@@ -62,10 +71,22 @@ class HotelDetailView(DetailView):
             except ValueError:
                 pass
 
+        ctx['reviews'] = hotel.reviews.select_related('author')
         ctx['available_rooms'] = rooms_qs.distinct()
         ctx['check_in'] = check_in_str
         ctx['check_out'] = check_out_str
+        ctx['review_form'] = ctx.get('form') or self.get_form()
         return ctx
+    
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            form.instance.author = request.user
+            form.instance.hotel = self.object
+            form.save()
+            return redirect(self.get_success_url())
+        return self.form_invalid(form)
 
 
 class RoomDetailView(DetailView):
