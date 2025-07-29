@@ -38,6 +38,17 @@ class CustomUserChangeForm(UserChangeForm):
             'tel_number': forms.TelInput(attrs={'class': 'form-input'}),
         }
 
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Customer
+        fields = ('username', 'email', 'age', 'tel_number')
+
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-input'}),
+            'email': forms.EmailInput(attrs={'class': 'form-input'}),
+            'age': forms.NumberInput(attrs={'class': 'form-input'}),
+            'tel_number': forms.TelInput(attrs={'class': 'form-input'})
+        }
 
 class LoginUserForm(AuthenticationForm):
     username = forms.CharField(label='Login', widget=forms.TextInput(attrs={'class': 'form-input'}))
