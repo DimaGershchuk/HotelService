@@ -10,7 +10,25 @@
     {% if user.age %}<p><strong>Age:</strong> {{ user.age }}</p>{% endif %}
     {% if user.tel_number %}<p><strong>Phone:</strong> {{ user.tel_number }}</p>{% endif %}
 
-    <a href="{% url 'profile-edit' %}" class="btn">Edit Profile</a>
-    <a href="{% url 'password_change'%}" class="btn">Change password</a>
-    
+    <a href="{% url 'profile-edit' %}" class="btn btn-primary">Edit Profile</a>
+    <a href="{% url 'password_change'%}" class="btn btn-primary">Change password</a>
+  </div>
+
+    <div class="booking-section">
+    <h2>My bookings</h2>
+        {% for b in bookings %}
+            <div class="card mb-3 p-3">
+                <strong>{{ b.check_in }} – {{ b.check_out }}</strong>
+                <ul class="mb-0">
+                {% for r in b.rooms.all %}
+                    <li>{{ r.hotel.name }} — Room {{ r.number }} ({{ r.get_type_display }})</li>
+                {% endfor %}
+                </ul>
+                <span>Total: {{ b.total_price }} ₴</span>
+            </div>
+        {% empty %}
+            <p>You have no bookings yet.</p>
+        {% endfor %}
+    </div>
+
 {% endblock %}
