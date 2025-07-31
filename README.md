@@ -97,3 +97,42 @@ HotelService/
   * `base.html`
   * `api.py`, `serializers.py`, `urls.py`
 
+ 
+### 🏨 Hotels Api Endpoints
+
+| Method | Route | Description | Access |
+|--------|-------|-------------|--------|
+| **GET**    | `/api/hotels/`           | List all hotels | Everyone |
+| **POST**   | `/api/hotels/`           | Create a hotel  | **Admin** |
+| **GET**    | `/api/hotels/{id}`       | Retrieve hotel  | Everyone |
+| **PUT**    | `/api/hotels/{id}`       | Update hotel    | **Admin** |
+| **DELETE** | `/api/hotels/{id}`       | Delete hotel    | **Admin** |
+
+### 🛏 Rooms
+
+| Method | Route | Description | Access |
+|--------|-------|-------------|--------|
+| **GET**    | `/api/hotels/{hotel_id}/rooms` | Rooms of a hotel | Everyone |
+| **POST**   | `/api/hotels/{hotel_id}/rooms` | Create room      | **Admin** |
+| **GET**    | `/api/rooms/{id}`              | Room details     | Everyone |
+| **PUT**    | `/api/rooms/{id}`              | Update room      | **Admin** |
+| **DELETE** | `/api/rooms/{id}`              | Delete room      | **Admin** |
+
+### 📑 Bookings
+
+| Method | Route | Description | Access |
+|--------|-------|-------------|--------|
+| **GET**    | `/api/bookings`         | List bookings (own) | **Authenticated** |
+| **POST**   | `/api/bookings`         | Create booking      | **Authenticated** |
+| **GET**    | `/api/bookings/{id}`    | Booking details     | Owner / **Admin** |
+| **PUT**    | `/api/bookings/{id}`    | Update booking      | Owner / **Admin** |
+| **DELETE** | `/api/bookings/{id}`    | Cancel booking      | Owner / **Admin** |
+
+### 👤 Customer
+
+| Method | Route | Description | Access |
+|--------|-------|-------------|--------|
+| **GET**    | `/api/customer`          | List users | **Admin** |
+| **POST**   | `/api/customer`          | Register   | Owner / **Admin** |
+| **GET**    | `/api/customer/{id}`     | User info  | Owner / **Admin** |
+| **PUT**    | `/api/customer/{id}`     | Update     | Owner / **Admin** |
