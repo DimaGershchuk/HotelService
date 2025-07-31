@@ -74,7 +74,7 @@ python manage.py runserver
 # 7. (Optional) Run tests
 pytest  # or python manage.py test
 
-| App Structure |
+# App Structure
 
 HotelService/          
 ├── Booking/            
