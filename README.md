@@ -73,3 +73,28 @@ python manage.py runserver
 
 # 7. (Optional) Run tests
 pytest  # or python manage.py test
+
+| App Structure |
+
+HotelService/          
+├── Booking/            
+├── Hotel/            
+├── Customer/          
+├── templates/
+    └── hotels/
+        └── hotel-detail.html
+        └── hotel-list.html
+        └── room-detail.html
+    └── bookings/
+        └── booking-detail.html
+        └── booking-form.html
+    └── users/
+        └── login.html
+        └── logout.html
+        └── password_change_done.html
+        └── password_change.html
+        └── profile-edit.html
+        └── profile.html
+        └── register.html
+    base.html    
+└── api.py / serializers.py / urls.py
