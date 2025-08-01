@@ -72,6 +72,12 @@ class HotelDetailView(FormMixin, DetailView):
                 pass
 
         ctx['reviews'] = hotel.reviews.select_related('author')
+
+        if self.request.user.is_authenticated:
+            ctx['has_review'] = hotel.reviews.filter(author=self.request.user).exists()
+        else:
+            ctx['has_review'] = False
+        
         ctx['available_rooms'] = rooms_qs.distinct()
         ctx['check_in'] = check_in_str
         ctx['check_out'] = check_out_str
