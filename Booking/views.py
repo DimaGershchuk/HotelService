@@ -2,12 +2,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.views.generic import FormView, DetailView
 from rest_framework import viewsets, permissions
-
+from django.urls import reverse
 from Hotel.models import Room
 from .models import Booking, BookingRoom
 from .serializers import BookingRoomSerializer, BookingSerializer
 from .forms import BookingForm
 from django.shortcuts import get_object_or_404
+from django.contrib import messages
 
 
 class BookingCreateView(LoginRequiredMixin, FormView):
@@ -16,6 +17,15 @@ class BookingCreateView(LoginRequiredMixin, FormView):
 
     def dispatch(self, request, *args, **kwargs):
         self.room = get_object_or_404(Room, pk=kwargs['pk'])
+        check_in = request.GET.get('check_in')
+        check_out = request.GET.get('check_out')
+
+        if not (check_in and check_out):
+            messages.warning(
+                request,
+                "First of all chose your filters."
+            )
+            return redirect(reverse('hotel-list'))
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **ctx):

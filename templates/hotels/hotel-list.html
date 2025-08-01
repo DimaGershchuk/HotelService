@@ -28,6 +28,12 @@
       <button type="submit" class="btn btn-primary px-4">Search</button>
   </form>
 
+  {% if messages %}
+    {% for m in messages %}
+      <div class="alert alert-{{ m.tags }}">{{ m }}</div>
+    {% endfor %}
+  {% endif %}
+
   <div class="row">
     {% for hotel in hotels %}
       <div class="col-md-4 mb-4 hotel-card">
@@ -50,6 +56,8 @@
       <p>No hotels found.</p>
     {% endfor %}
   </div>
+
+
 
   {% if is_paginated %}
     <nav>
