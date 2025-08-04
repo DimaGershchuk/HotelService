@@ -7,7 +7,7 @@ from django.contrib.auth import get_user_model
 from rest_framework.test import APIClient
 from rest_framework import status
 
-from Hotel.models import Hotel, Room, RoomType
+from Hotel.models import Hotel, Room, RoomType, HotelReview
 from Booking.models import Booking, BookingRoom
 
 User = get_user_model()
@@ -32,9 +32,6 @@ class BaseDataMixin:
         return hotel, rooms
 
 
-# ------------------------------------------------------------------ #
-#   CLASS‑BASED TEMPLATE VIEWS                                       #
-# ------------------------------------------------------------------ #
 class HotelListViewTests(BaseDataMixin, TestCase):
     @classmethod
     def setUpTestData(cls):
@@ -59,3 +56,30 @@ class HotelListViewTests(BaseDataMixin, TestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertContains(resp, 'Lviv Hotel')
         self.assertNotContains(resp, 'Kyiv Hotel')
+
+
+class HotelDetailViewTest(BaseDataMixin, TestCase):
+    def setUp(self):
+        self.hotel, (self.room_busy, self.room_free) = self.make_hotel(prices=(150, 180))
+        self.url = reverse('hotel-detail', kwargs={'pk': self.hotel.pk})
+
+        self.user = User.objects.create_user('bob', password='p')
+        ci = date.today() + timedelta(days=1)
+        co = ci + timedelta(days=1)
+        booking = Booking.objects.create(
+            customer=self.user, check_in=ci, check_out=co, total_price=150
+        )
+        BookingRoom.objects.create(booking=booking, room=self.room_busy)
+        self.ci_str = ci.strftime('%d-%m-%Y')
+        self.co_str = co.strftime('%d-%m-%Y')
+    
+    def test_post_review(self):
+        self.client.login(username='bob', password='p')
+        resp = self.client.post(self.url, {
+            'rating': 5,
+            'comment': 'Awesome!'
+        })
+        self.assertRedirects(resp, self.url)
+        self.assertTrue(HotelReview.objects.filter(
+            hotel=self.hotel, author=self.user, rating=5
+        ).exists())
