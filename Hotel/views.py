@@ -58,6 +58,8 @@ class HotelDetailView(FormMixin, DetailView):
         hotel = self.object
         check_in_str = self.request.GET.get('check_in')
         check_out_str = self.request.GET.get('check_out')
+        min_price_str = self.request.GET.get('min_price')
+        max_price_str = self.request.GET.get('max_price')
 
         rooms_qs = hotel.room_set.all()
 
@@ -70,6 +72,13 @@ class HotelDetailView(FormMixin, DetailView):
                                           bookingroom__booking__check_out__gt = ci,)
             except ValueError:
                 pass
+        try:
+            if min_price_str not in (None, ''):
+                rooms_qs = rooms_qs.filter(price_per_night__gte=int(min_price_str))
+            if max_price_str not in (None, ''):
+                rooms_qs = rooms_qs.filter(price_per_night__lte=int(max_price_str))
+        except ValueError:
+            pass
 
         ctx['reviews'] = hotel.reviews.select_related('author')
 
